@@ -1,0 +1,446 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0002">
+<title>MUEEN STORE - Premium Digital Assets</title>
+<meta name="description" content="MUEEN STORE - Digital assets, video editing resources, creative tools and learning resources.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root {
+  --red:#d31027;
+  --red2:#ff416c;
+  --bg:#0a0002;
+  --panel:rgba(255,255,255,.045);
+  --border:rgba(255,255,255,.1);
+  --muted:#aaa;
+  --green:#4caf50;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:Poppins,sans-serif;
+  color:#fff;
+  background:
+    radial-gradient(ellipse at 50% 0%,rgba(138,11,26,.4),transparent 55%),
+    radial-gradient(circle at 80% 80%,rgba(211,16,39,.1),transparent 40%),
+    var(--bg);
+  background-attachment:fixed;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+button,input,a{-webkit-tap-highlight-color:transparent}
+button,a{font-family:inherit}
+a{color:inherit}
+.ambient{
+  position:fixed;inset:0;pointer-events:none;z-index:-1;
+  background:radial-gradient(circle,rgba(211,16,39,.05),transparent 70%);
+  animation:pulse 8s infinite alternate;
+}
+@keyframes pulse{to{opacity:.4;transform:scale(1.1)}}
+.glass{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:16px;
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  box-shadow:0 10px 40px rgba(0,0,0,.4);
+}
+.shine{animation:shine 6s infinite}
+@keyframes shine{
+  50%{border-color:rgba(211,16,39,.45);box-shadow:0 8px 32px rgba(211,16,39,.12)}
+}
+#lock-screen{
+  position:fixed;inset:0;z-index:9999;
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;background:rgba(5,0,0,.92);
+  backdrop-filter:blur(20px);
+}
+.lock-panel{width:100%;max-width:420px;padding:30px;text-align:center}
+.lock-icon{
+  width:64px;height:64px;margin:0 auto 20px;
+  display:grid;place-items:center;border-radius:50%;
+  background:rgba(211,16,39,.13);color:var(--red);
+  border:1px solid rgba(211,16,39,.4);font-size:25px;
+}
+.lock-panel h2{font-size:24px;font-weight:800;margin-bottom:12px}
+.lock-desc{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:24px}
+#password-input{
+  width:100%;padding:15px;border-radius:8px;
+  background:#100608;color:white;border:1px solid var(--border);
+  text-align:center;font-size:16px;outline:none;margin-bottom:15px;
+}
+#password-input:focus{border-color:var(--red)}
+.primary-btn{
+  display:block;width:100%;padding:15px;border:0;border-radius:8px;
+  background:linear-gradient(135deg,var(--red),var(--red2));
+  color:white;font-weight:800;font-size:15px;cursor:pointer;
+}
+#error-msg{display:none;color:#ff6868;font-size:13px;margin-top:15px}
+.shaking{animation:shake .4s}
+@keyframes shake{
+  25%{transform:translateX(-6px)}
+  50%{transform:translateX(6px)}
+  75%{transform:translateX(-4px)}
+}
+#main-content{
+  display:none;width:100%;max-width:650px;margin:auto;
+  padding:20px 18px 60px;
+}
+.profile-header{text-align:center;margin:35px 0;animation:fade .7s ease}
+@keyframes fade{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.profile-img-wrapper{width:130px;height:130px;margin:0 auto 22px;position:relative}
+.profile-img-ring{
+  position:absolute;inset:-5px;border-radius:50%;
+  background:conic-gradient(transparent,var(--red),transparent);
+  animation:rotate 4s linear infinite;
+}
+@keyframes rotate{to{transform:rotate(360deg)}}
+.profile-img{
+  position:absolute;inset:3px;border-radius:50%;
+  background:#100608;border:3px solid var(--red);
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;font-size:23px;font-weight:800;
+  font-style:italic;color:var(--red);line-height:1.15;
+  box-shadow:0 0 25px rgba(211,16,39,.4);
+}
+.profile-title{font-size:25px;font-weight:800;letter-spacing:1px}
+.profile-bio{font-size:13px;color:#ccc;line-height:1.9;margin:14px auto 20px}
+.social-icons{display:flex;justify-content:center;gap:15px}
+.social-icons a{
+  width:44px;height:44px;border:1px solid var(--border);
+  border-radius:50%;background:rgba(255,255,255,.07);
+  display:grid;place-items:center;text-decoration:none;font-size:19px;
+  transition:.25s;
+}
+.social-icons a:hover{background:var(--red);transform:translateY(-3px)}
+.product-card{padding:0;overflow:hidden;margin-bottom:28px}
+.product-img-header{
+  min-height:220px;display:grid;place-items:center;text-align:center;
+  background:linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.85)),
+  url('https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?q=80&w=1000&auto=format&fit=crop') center/cover;
+  border-bottom:1px solid var(--border);
+}
+.product-img-text i{font-size:42px;color:#4da6ff;margin-bottom:13px}
+.product-img-text h3{font-size:22px;letter-spacing:3px;font-weight:800;line-height:1.5}
+.product-info{padding:24px}
+.product-title{font-size:17px;font-weight:700;line-height:1.6;margin-bottom:12px}
+.product-subtitle{font-size:13px;color:var(--muted);line-height:1.8;margin-bottom:20px}
+.price-row{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  background:rgba(0,0,0,.3);padding:13px;border-radius:8px;
+  margin-bottom:22px;border:1px solid rgba(255,255,255,.05);
+}
+.current-price{font-size:28px;font-weight:800}
+.old-price{font-size:15px;color:#888;text-decoration:line-through}
+.discount-tag{
+  margin-left:auto;color:var(--green);font-size:12px;font-weight:700;
+  padding:5px 8px;border:1px solid rgba(76,175,80,.3);
+  background:rgba(76,175,80,.1);border-radius:5px;
+}
+.buy-btn{
+  display:block;text-align:center;text-decoration:none;
+  width:100%;padding:17px;background:white;color:#111;
+  border-radius:8px;font-size:15px;font-weight:800;
+  letter-spacing:2px;transition:.25s;
+  animation:buyPulse 3s infinite;
+}
+@keyframes buyPulse{50%{box-shadow:0 0 18px rgba(255,255,255,.18);transform:scale(1.01)}}
+.buy-btn:hover{background:#ddd;animation-play-state:paused}
+.section{padding:23px;margin-bottom:28px}
+.section-header{
+  font-size:13px;color:#999;letter-spacing:2px;font-weight:700;
+  border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:20px;
+}
+.details-list{list-style:none;font-size:13px;color:#ccc;line-height:1.8}
+.details-list li{margin-bottom:10px}
+.details-list .category-title{
+  margin:24px 0 14px;padding:9px 12px;
+  background:rgba(255,255,255,.05);border-left:3px solid var(--red);
+  border-radius:5px;color:white;font-weight:800;
+}
+.details-list .category-title:first-child{margin-top:0}
+.faq-item{border-bottom:1px solid var(--border);padding:18px 0}
+.faq-item:last-child{border:0;padding-bottom:0}
+.faq-question{
+  display:flex;justify-content:space-between;gap:15px;align-items:center;
+  font-size:14px;font-weight:600;cursor:pointer;line-height:1.6;
+}
+.faq-question i{color:var(--red);transition:.3s}
+.faq-item.active .faq-question i{transform:rotate(180deg)}
+.faq-answer{
+  display:none;color:#bbb;font-size:13px;line-height:1.8;padding-top:12px;
+}
+.faq-item.active .faq-answer{display:block}
+footer{text-align:center;color:#888;font-size:12px;line-height:2;padding:15px}
+footer strong{color:white}
+@media(max-width:480px){
+  #main-content{padding:15px 12px 45px}
+  .lock-panel{padding:23px}
+  .profile-title{font-size:22px}
+  .product-img-header{min-height:180px}
+  .product-info{padding:19px}
+  .section{padding:18px}
+  .price-row{gap:9px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+
+<body>
+<div class="ambient"></div>
+
+<!-- PASSWORD SCREEN -->
+<div id="lock-screen">
+  <div class="glass lock-panel" id="lock-container">
+    <div class="lock-icon"><i class="fas fa-lock"></i></div>
+    <h2>Access Locked</h2>
+    <p class="lock-desc">Enter your password to access MUEEN STORE premium content.</p>
+    <form id="unlock-form">
+      <input type="password" id="password-input"
+        placeholder="Enter Password" autocomplete="current-password"
+        aria-label="Website password" required>
+      <button type="submit" class="primary-btn">Unlock Website</button>
+    </form>
+    <p id="error-msg" role="alert">Incorrect password. Please try again.</p>
+  </div>
+</div>
+
+<!-- MAIN WEBSITE -->
+<main id="main-content">
+
+  <header class="profile-header">
+    <div class="profile-img-wrapper">
+      <div class="profile-img-ring"></div>
+      <div class="profile-img">MUEEN<br>STORE</div>
+    </div>
+
+    <h1 class="profile-title">MUEEN STORE</h1>
+    <p class="profile-bio">
+      🚀 MUEEN STORE | Digital Assets &amp; Technology<br>
+      💻 Tools • Creative Resources • Learning<br>
+      📚 Learn • Build • Grow
+    </p>
+
+    <div class="social-icons">
+      <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer"
+         aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://youtube.com/" target="_blank" rel="noopener noreferrer"
+         aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      <a href="https://github.com/" target="_blank" rel="noopener noreferrer"
+         aria-label="GitHub"><i class="fab fa-github"></i></a>
+    </div>
+  </header>
+
+  <!-- PRODUCT -->
+  <section class="glass product-card shine">
+    <div class="product-img-header">
+      <div class="product-img-text">
+        <i class="fas fa-globe-americas"></i>
+        <h2>MUEEN STORE<br>DIGITAL HUB</h2>
+      </div>
+    </div>
+
+    <div class="product-info">
+      <h2 class="product-title">
+        💎 MUEEN STORE – Premium Digital Assets &amp; Creative Resources
+      </h2>
+      <p class="product-subtitle">
+        📦 Digital resources, video editing assets, creative tools,
+        learning resources and reels bundles in one place.
+      </p>
+
+      <div class="price-row">
+        <span class="current-price">₹26</span>
+        <span class="old-price">₹1499</span>
+        <span class="discount-tag">98% off</span>
+      </div>
+
+      <a class="buy-btn" id="main-buy-btn"
+         href="https://docs.google.com/document/d/1WLNkB6YWQOg6hvn7zMRcmxgFegmGwrkIu6X0B0nnT30/edit?usp=drivesdk"
+         target="_blank" rel="noopener noreferrer">
+        <i class="fas fa-shopping-cart"></i> GET ACCESS
+      </a>
+    </div>
+  </section>
+
+  <!-- PRODUCT DETAILS -->
+  <section class="glass section shine">
+    <h2 class="section-header">ABOUT THE PACK</h2>
+    <ul class="details-list">
+      <li class="category-title">📦 VIDEO / REELS CONTENT BUNDLES</li>
+      <li>🎬 Ready-to-post video and reels resources</li>
+      <li>🔹 AI Reels and animated cartoon resources</li>
+      <li>🔹 Daily Hacks &amp; Life Hacks</li>
+      <li>🔹 Quotes and motivational content</li>
+      <li>🔹 Stock market educational content</li>
+      <li>🔹 Car, lifestyle and creative resources</li>
+      <li>🧠 Resources for social media creators</li>
+
+      <li class="category-title">🎬 VIDEO EDITING ASSETS</li>
+      <li>⚡ Editing templates and creative assets</li>
+      <li>📁 Editing packs and general resources</li>
+      <li>🎵 Sound effects and audio resources</li>
+
+      <li class="category-title">🌐 RECOMMENDED EDITING WEBSITES</li>
+      <li>🌍 Sources for templates and visual effects</li>
+      <li>🎨 LUTs and colour grading resources</li>
+
+      <li class="category-title">🎵 SOUND EFFECTS &amp; STOCK FOOTAGE</li>
+      <li>🔊 Stock audio, footage and sound resources</li>
+
+      <li class="category-title">🎓 COURSES &amp; APPLICATIONS</li>
+      <li>📚 Learning materials and educational resources</li>
+      <li>🚀 Useful creative tools and applications</li>
+
+      <li class="category-title">📌 CREATIVE INSPIRATION</li>
+      <li>💡 Design ideas and visual references</li>
+    </ul>
+  </section>
+
+  <!-- FAQ -->
+  <section class="glass section shine">
+    <h2 class="section-header">FREQUENTLY ASKED QUESTIONS</h2>
+
+    <div class="faq-item">
+      <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
+        <span>MUEEN STORE kya hai?</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        MUEEN STORE is a digital resource storefront for creative assets,
+        editing resources and learning materials.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
+        <span>Payment ke baad mujhe kya milega?</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        Check the product access details before purchasing. This page
+        currently links to a Google document and does not verify payments
+        or automatically deliver purchases.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
+        <span>Kya access lifetime ke liye hai?</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        Access duration depends on the actual product terms. Confirm
+        lifetime access with the seller before purchasing.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
+        <span>Kya payment safe hai?</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        This page does not process payments. Use a verified payment
+        provider when a payment gateway has been properly integrated.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
+        <span>Kya beginners ke liye useful hai?</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        Creative resources may help beginners. Review the actual contents
+        and usage licences before purchasing.
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <strong>MUEEN STORE</strong><br>
+    Digital Resources • Creativity • Technology<br>
+    © <span id="year"></span> MUEEN STORE. All rights reserved.
+  </footer>
+</main>
+
+<script>
+"use strict";
+
+/*
+ * Demo password only.
+ * A password embedded in client-side JavaScript is not secure.
+ * Use server-side authentication for real access protection.
+ */
+const WEBSITE_PASSWORD = "AS26PACKSAM";
+
+const unlockForm = document.getElementById("unlock-form");
+const passwordInput = document.getElementById("password-input");
+const lockScreen = document.getElementById("lock-screen");
+const lockContainer = document.getElementById("lock-container");
+const errorMsg = document.getElementById("error-msg");
+const mainContent = document.getElementById("main-content");
+
+unlockForm.addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  if (passwordInput.value === WEBSITE_PASSWORD) {
+    errorMsg.style.display = "none";
+    lockScreen.style.display = "none";
+    mainContent.style.display = "block";
+    window.scrollTo(0, 0);
+  } else {
+    errorMsg.style.display = "block";
+    lockContainer.classList.remove("shaking");
+    void lockContainer.offsetWidth;
+    lockContainer.classList.add("shaking");
+    passwordInput.value = "";
+    passwordInput.focus();
+  }
+});
+
+// Accessible FAQ accordion
+document.querySelectorAll(".faq-question").forEach(function(question) {
+  function toggle() {
+    const item = question.closest(".faq-item");
+    const wasOpen = item.classList.contains("active");
+
+    document.querySelectorAll(".faq-item").forEach(function(other) {
+      other.classList.remove("active");
+      other.querySelector(".faq-question").setAttribute("aria-expanded", "false");
+    });
+
+    if (!wasOpen) {
+      item.classList.add("active");
+      question.setAttribute("aria-expanded", "true");
+    }
+  }
+
+  question.addEventListener("click", toggle);
+  question.addEventListener("keydown", function(event) {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      toggle();
+    }
+  });
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+// Focus password field when the page loads
+window.addEventListener("load", function() {
+  passwordInput.focus();
+});
+</script>
+</body>
+</html>
